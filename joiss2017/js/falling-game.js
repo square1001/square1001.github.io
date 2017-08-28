@@ -75,7 +75,7 @@ function draw() {
 	context.fillText("Current Score: " + pos, 10, 27);
 }
 function iscollide() {
-	if (pos >= 21 && a[(pos - 21) % 1000] == pme) return true;
+	if (pos >= 20 && a[(pos - 20) % 1000] == pme) return true;
 	return false;
 }
 function finish() {

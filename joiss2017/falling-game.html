@@ -4,15 +4,17 @@
 	<title>Falling Game with HTML5 Canvas</title>
 </head>
 <body>
-	<canvas id="cvs" width="500" height="500">
-		This browser doesn't support canvas.
+	<h1>Falling Game</h1>
+	<canvas id="cvs" width="500" height="500" style="float: left; margin-left: 20px;">
+		This browser does not support HTML5 canvas.
 	</canvas>
-	<div style="display: none; width: 120px; height: 500px; float: right;">
-		<p>Key 1: <span style="color: #dddddd">Gray</span></p>
-		<p>Key 2: <span style="color: #99ffff">Blue</span></p>
-		<p>Key 3: <span style="color: #ff99ff">Red</span></p>
-		<p>Key 4: <span style="color: #ffff99">Yellow</span></p>
-		<p>Key 5: White</p>
+	<div style="width: 500px; height: 500px; float: left; margin-left: 30px;">
+		<p>Rule of this Game</p>
+		<ul>
+			<li>You can move light-orange cell with left and right key</li>
+			<li>The light-blue cells are poison so you cannot collide them to light-orange cell</li>
+			<li>If you survive longer, you can get more score</li>
+		</ul>
 	</div>
 	<script src="js/falling-game.js"></script>
 </body>

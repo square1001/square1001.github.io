@@ -65,7 +65,7 @@ function solve() {
 				if (a[i][j] == 3) gx = i, gy = j;
 			}
 		}
-		var que = new Array(); que.push(sx * H + sy); dist[sx * W + sy] = 0;
+		var que = new Array(); que.push(sx * W + sy); dist[sx * W + sy] = 0;
 		var dx = [0, 1, 0, -1];
 		var dy = [1, 0, -1, 0];
 		while (que.length >= 1) {
@@ -79,7 +79,7 @@ function solve() {
 			}
 		}
 		if (dist[gx * W + gy] == -1) {
-			document.getElementById("warn_nosol").innerHTML = "There are no path between start and goal";
+			document.getElementById("warn_nosol").innerHTML = "There is no path between start and goal";
 		}
 		else {
 			context.strokeStyle = "red";

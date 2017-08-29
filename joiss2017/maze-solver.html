@@ -2,24 +2,36 @@
 <html>
 <head>
 	<title>Maze Solver with HTML5 Canvas</title>
+	<link type="text/css" rel="stylesheet" href="css.css" />
 </head>
 <body>
 	<h1>Maze Solver</h1>
 	<h2>Input</h2>
-	<p>Number of Row (3 &le; r &le; 30): <input type="number" id="row" value="3" min="3" max="30" /></p>
-	<p>Number of Column (3 &le; c &le; 30): <input type="number" id="col" value="3" min="3" max="30" /></p>
-	<button onclick="start()">Start Editing</button>
+	<p>Number of Row (2 &le; r &le; 30): <input type="number" id="row" value="7" min="2" max="30" /></p>
+	<p>Number of Column (2 &le; c &le; 30): <input type="number" id="col" value="7" min="2" max="30" /></p>
+	<button onclick="start_button()">Start Editing</button>
+	<hr />
 	<h2>Editor / Solver</h2>
-	<p id="warn_start" style="color: red; font: bold 20px;"></p>
-	<p id="warn_goal" style="color: red; font: bold 20px;"></p>
-	<p id="warn_nosol" style="color: red; font: bold 20px;" ></p>
-	<canvas id="cvs">
+	<canvas id="cvs" style="float: left;">
 		This browser does not support HTML5 Canvas.
 	</canvas>
-	<p>
-		<button onclick="isediting = false; solve()">Run</button>
-		<button onclick="isediting = true; draw()">Edit</button>
-	</p>
+	<div style="float: left; margin-left: 50px; width: 450px;">
+		<h2>How to use this editor</h2>
+		<ul style="list-style-type: none">
+			<li>You can choose four species of block from the selector which is on right of the editor.</li>
+			<li id="state1">Currently it is <span style="color: red;">editing mode</span>.</li>
+			<li id="state2">If you want to run, press "Run" button.</li>
+		</ul>
+		<h2>Results / Notifications</h2>
+		<ul style="list-style-type: none; font-size: 16px; font-weight: bold;">
+			<li id="warn_start" style="color: red; display: none;">There must be exactly one start point.</li>
+			<li id="warn_goal" style="color: red; display: none;">There must be exactly one goal point.</li>
+			<li id="result" style="color: #222222; display: block;"></li>
+		</ul>
+		<br>
+		<button onclick="run_button()">Run</button>
+		<button onclick="edit_button()">Edit</button>
+	</div>
 	<script src="js/maze-solver.js"></script>
 </body>
 </html>

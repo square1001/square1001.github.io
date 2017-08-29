@@ -7,7 +7,7 @@ for(var i = 0; i < 4; i++) {
 	img[i].onload = function() {
 		curload++;
 		if(curload == 4) {
-			start();
+			start_button();
 		}
 	}
 }
@@ -15,20 +15,6 @@ img[0].src = "img/whitecell.png";
 img[1].src = "img/blackcell.png";
 img[2].src = "img/startcell.png";
 img[3].src = "img/goalcell.png";
-function start() {
-	H = document.getElementById("row").value;
-	W = document.getElementById("col").value;
-	d = Math.ceil(1400 / (20 + Math.max(H, W)));
-	a = Array(H);
-	for (var i = 0; i < H; i++) {
-		a[i] = Array(W);
-		for (var j = 0; j < W; j++) a[i][j] = 0;
-	}
-	cvs.height = Math.max(d * H + 10, 221);
-	cvs.width = d * W + 70;
-	draw();
-	isediting = true;
-}
 window.onmousedown = function (event) {
 	var px = event.pageX - cvs.offsetLeft;
 	var py = event.pageY - cvs.offsetTop;
@@ -45,6 +31,32 @@ window.onmousedown = function (event) {
 		}
 	}
 }
+function start_button() {
+	H = document.getElementById("row").value;
+	W = document.getElementById("col").value;
+	d = Math.ceil(1200 / (20 + Math.max(H, W)));
+	a = Array(H);
+	for (var i = 0; i < H; i++) {
+		a[i] = Array(W);
+		for (var j = 0; j < W; j++) a[i][j] = 0;
+	}
+	cvs.height = Math.max(d * H + 10, 221);
+	cvs.width = d * W + 70;
+	document.getElementById("result").innerHTML = "There is no notification currently.";
+	edit_button();
+}
+function run_button() {
+	isediting = false;
+	document.getElementById("state1").innerHTML = 'Currently it is <span style="color: red;"> Running mode.</span>'
+	document.getElementById("state2").innerHTML = 'If you want to edit, click "Edit" button.'
+	solve();
+}
+function edit_button() {
+	isediting = true;
+	document.getElementById("state1").innerHTML = 'Currently it is <span style="color: red;"> Editing mode.</span>'
+	document.getElementById("state2").innerHTML = 'If you want to run, click "Run" button.'
+	draw();
+}
 function solve() {
 	var nums = 0, numg = 0;
 	for (var i = 0; i < H; i++) {
@@ -53,9 +65,9 @@ function solve() {
 			if (a[i][j] == 3) numg++;
 		}
 	}
-	document.getElementById("warn_start").innerHTML = (nums != 1 ? "There must be exactly one start point" : "");
-	document.getElementById("warn_goal").innerHTML = (numg != 1 ? "There must be exactly one goal point" : "");
-	document.getElementById("warn_nosol").innerHTML = "";
+	document.getElementById("warn_start").style.display = (nums == 1 ? "none" : "block");
+	document.getElementById("warn_goal").style.display = (numg == 1 ? "none" : "block");
+	document.getElementById("result").style.display = (nums != 1 || numg != 1 ? "none" : "block");
 	if (nums == 1 && numg == 1) {
 		var dist = new Array(H * W), sx = -1, sy = -1, gx = -1, gy = -1;
 		for (var i = 0; i < H; i++) {
@@ -79,7 +91,7 @@ function solve() {
 			}
 		}
 		if (dist[gx * W + gy] == -1) {
-			document.getElementById("warn_nosol").innerHTML = "There is no path between start and goal";
+			document.getElementById("result").innerHTML = 'There is <span style="color: red;">no</span> path between start and goal.';
 		}
 		else {
 			context.strokeStyle = "red";
@@ -98,6 +110,7 @@ function solve() {
 				}
 			}
 			context.stroke();
+			document.getElementById("result").innerHTML = 'The distance of shortest path is <span style="color: red;">' + dist[gx * W + gy] + '.';
 		}
 	}
 }

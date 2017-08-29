@@ -1,0 +1,42 @@
+body {
+    margin: 5px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+h1 {
+    font-size: 40px;
+    margin: 10px 0px 10px 0px;
+}
+h2 {
+    font-size: 24px;
+    margin: 7px 0px 7px 10px;
+    border-bottom: 2px solid #cccccc;
+    text-decoration-color: #cccccc;
+}
+p {
+    color: #222222;
+    font-size: 16px;
+    margin: 2px 0px 2px 12px;
+    text-indent: 14px;
+}
+ul {
+    margin: 5px 0px 5px 10px;
+    padding: 10px 10px 10px 20px;
+    text-indent: 9px;
+}
+button {
+    background-color: #4caf50;
+    color: #ffffff;
+    font-size: 16px;
+    margin: 5px 0px 5px 12px;
+    border: 2px solid #4caf50;
+    padding: 7px 14px 7px 14px;
+    border-radius: 4px;
+}
+button:hover {
+    background-color: #3e8e41;
+    border-color: #3e8e41;
+}
+canvas {
+    border: 2px solid #eeeeee;
+    margin: 6px 0px 6px 15px;
+}

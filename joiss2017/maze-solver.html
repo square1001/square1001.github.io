@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Maze Solver with HTML5 Canvas</title>
+</head>
+<body>
+	<h1>Maze Solver</h1>
+	<h2>Input</h2>
+	<p>Number of Row (3 &le; r &le; 30): <input type="number" id="row" value="3" min="3" max="30" /></p>
+	<p>Number of Column (3 &le; c &le; 30): <input type="number" id="col" value="3" min="3" max="30" /></p>
+	<button onclick="start()">Start Editing</button>
+	<h2>Editor / Solver</h2>
+	<p id="warn_start" style="color: red; font: bold 20px;"></p>
+	<p id="warn_goal" style="color: red; font: bold 20px;"></p>
+	<p id="warn_nosol" style="color: red; font: bold 20px;" ></p>
+	<canvas id="cvs">
+		This browser does not support HTML5 Canvas.
+	</canvas>
+	<p>
+		<button onclick="isediting = false; solve()">Run</button>
+		<button onclick="isediting = true; draw()">Edit</button>
+	</p>
+	<script src="js/maze-solver.js"></script>
+</body>
+</html>

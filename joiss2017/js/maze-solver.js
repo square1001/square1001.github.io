@@ -49,6 +49,7 @@ function run_button() {
 	isediting = false;
 	document.getElementById("state1").innerHTML = 'Currently it is <span style="color: red;"> Running mode.</span>'
 	document.getElementById("state2").innerHTML = 'If you want to edit, click "Edit" button.'
+	draw();
 	solve();
 }
 function edit_button() {
@@ -94,18 +95,41 @@ function solve() {
 			document.getElementById("result").innerHTML = 'There is <span style="color: red;">no</span> path between start and goal.';
 		}
 		else {
+			var distv = new Array(H * W);
+			for(var i = 0; i < H * W; i++) distv[i] = new Array();
+			for (var i = 0; i < H; i++) {
+				for (var j = 0; j < W; j++) {
+					if (dist[i * W + j] != -1) distv[dist[i * W + j]].push(i * W + j);
+				}
+			}
+			var way = new Array(H * W);
+			for(var i = 0; i < H * W; i++) way[i] = 0;
+			way[gx * W + gy] = 1;
+			for (var i = dist[gx * W + gy] - 1; i >= 0; i--) {
+				for (var j = 0; j < distv[i].length; j++) {
+					var p = distv[i][j];
+					for(var k = 0; k < 4; k++) {
+						var tx = Math.floor(p / W) + dx[k], ty = p % W + dy[k];
+						if (0 <= tx && tx < H && 0 <= ty && ty < W && dist[tx * W + ty] == i + 1) way[p] += way[tx * W + ty];
+					}
+				}
+			}
+			var pos = sx * W + sy;
 			context.strokeStyle = "red";
 			context.lineWidth = d / 8;
 			context.beginPath();
-			var pos = gx * W + gy;
 			context.moveTo(pos % W * d + d / 2 + 5, Math.floor(pos / W) * d + d / 2 + 5);
-			for (var i = dist[gx * W + gy] - 1; i >= 0; i--) {
+			for (var i = 0; i < dist[gx * W + gy]; i++) {
+				var sum = 0, prb = Math.floor(Math.random() * way[pos]);
 				for (var j = 0; j < 4; j++) {
 					var tx = Math.floor(pos / W) + dx[j], ty = pos % W + dy[j];
-					if (0 <= tx && tx < H && 0 <= ty && ty < W && dist[tx * W + ty] == i) {
-						context.lineTo(ty * d + d / 2 + 5, tx * d + d / 2 + 5);
-						pos = tx * W + ty;
-						break;
+					if (0 <= tx && tx < H && 0 <= ty && ty < W && dist[tx * W + ty] == i + 1) {
+						if (sum <= prb && prb < sum + way[tx * W + ty]) {
+							context.lineTo(ty * d + d / 2 + 5, tx * d + d / 2 + 5);
+							pos = tx * W + ty;
+							break;
+						}
+						sum += way[tx * W + ty];
 					}
 				}
 			}

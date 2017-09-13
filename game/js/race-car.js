@@ -19,8 +19,9 @@ var IMG_CAR_GREEN;
 var IMG_CAR_BLUE;
 var IMG_GOAL;
 var MOVE_INTERVAL_VALUE;
-var GOAL = 5000;
-var MOVE_PER_SEC = 30;
+var GOAL = 5000; // meter
+var MOVE_PER_SEC = 30; // FPS
+var MOB_SPEED = 20; // meter per second
 var MAX_DEGREE = 40 / 180 * Math.PI;
 var STATE = -1;
 for (var i = 0; i < IMG_COUNT; i++) {
@@ -109,19 +110,22 @@ function init_var() {
 function move() {
 	dist += speed() * Math.cos(dir) / MOVE_PER_SEC;
 	row += speed() * 5 * Math.sin(dir) / MOVE_PER_SEC;
-	cnt++;
 	if (Math.abs(dir) > 1.0e-7 && Math.abs(row - row_fixed * 80) < Math.abs(speed() * 5 * Math.sin(dir) / MOVE_PER_SEC)) {
 		row = row_fixed * 80;
 		dir = 0.0;
 	}
+	for (var i = 0; i < mobx.length; i++) {
+		mobx[i] += MOB_SPEED / MOVE_PER_SEC;
+	}
+	cnt++;
 	if (dist < GOAL) {
 		speed_var += 1 / MOVE_PER_SEC;
 		moves++;
 	}
 	else {
 		if (cleared == false) cleared = true;
-		if (speed_var > 0) speed_var *= 0.95;
-		if (speed_var < 1.0e-4) {
+		if (speed_var > 0) speed_var *= Math.pow(0.5, 1.0 / MOVE_PER_SEC);
+		if (speed_var < 1.0e-3) {
 			speed_var = 0;
 			game_end();
 			return;
@@ -130,7 +134,7 @@ function move() {
 	var colp = collide();
 	if (colp != -1) {
 		mobf[colp] = false;
-		speed_var = 1;
+		speed_var = Math.min(1, speed_var);
 	}
 	score = Math.floor(dist) * 4;
 	draw();
@@ -153,6 +157,9 @@ function draw_start() {
 	context.fillText("Press Space Key to Start", 375, 400);
 }
 function draw_end() {
+	context.clearRect(0, 0, 750, 500);
+	context.globalAlpha = 0.3;
+	draw();
 	context.globalAlpha = 1.0;
 	context.fillStyle = "#333333";
 	context.font = "normal bold 45px sans-serif";

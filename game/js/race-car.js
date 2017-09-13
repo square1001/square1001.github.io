@@ -23,7 +23,7 @@ var IMG_GOAL;
 var MOVE_INTERVAL_VALUE;
 var GOAL = 10000; // meter
 var MOVE_PER_SEC = 30; // FPS
-var MOB_SPEED = 20; // meter per second
+var MOB_SPEED = 27 / 3.6; // meter per second
 var MAX_DEGREE = 40 / 180 * Math.PI;
 var STATE = -1;
 for (var i = 0; i < IMG_COUNT; i++) {
@@ -172,7 +172,7 @@ function move() {
 function collide_mob() {
 	for (var i = 0; i < mobx.length; i++) {
 		var px = dist - mobx[i], py = row - mobr[i] * 80;
-		if (mobf[i] && -20 < px && px < 20 && -25 <= py && py < 25) return i;
+		if (mobf[i] && -20 < px && px < 20 && -50 <= py && py < 50) return i;
 	}
 	return -1;
 }
@@ -265,8 +265,7 @@ function drawsidebar() {
 	context.font = "normal normal 22px sans-serif"
 	context.fillText("Time(sec): " + Math.floor(moves / MOVE_PER_SEC * 100) / 100, 510, 175);
 	context.fillText("Distance(m): " + Math.min(Math.floor(dist), GOAL), 510, 215);
-	// context.fillText("Boost  x" + boost, 510, 255);
-	// context.fillText("Invinc.  x" + invinc, 625, 340);
+	context.fillText("Coins: " + coins, 510, 255);
 	context.font = "25px fantasy";
 	context.textAlign = "left";
 	context.fillText("Speed:  " + Math.round(speed() * 3.6) + "km/h", 510, 420);

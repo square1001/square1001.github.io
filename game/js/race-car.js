@@ -196,7 +196,7 @@ function drawsidebar() {
 	context.textAlign = "left";
 	context.fillText("SCORE:", 510, 50);
 	context.textAlign = "right";
-	context.fillText(Math.floor(dist * 2), 730, 120);
+	context.fillText(score, 730, 120);
 	context.textAlign = "left";
 	context.font = "normal normal 22px sans-serif"
 	context.fillText("Time(sec): " + Math.floor(moves / MOVE_PER_SEC * 100) / 100, 510, 175);

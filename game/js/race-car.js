@@ -351,9 +351,10 @@ function drawranking() {
 	context.fillText("Ranking", 375, 100);
 	context.font = "35px sans-serif";
 	var res = get_ranking();
+	var suffix = ["st", "nd", "rd", "th", "th"];
 	for (var i = 0; i < 5 && i < res.length; i++) {
 		context.textAlign = "left";
-		context.fillText((i + 1) + "th:", 200, 190 + i * 50);
+		context.fillText((i + 1) + suffix[i] + ":", 200, 190 + i * 50);
 		context.textAlign = "right";
 		context.fillText(res[i], 550, 190 + i * 50);
 	}

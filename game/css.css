@@ -1,0 +1,66 @@
+body {
+    background-color: #bbbbbb;
+    margin: 0px 0px 0px 0px;
+}
+header {
+    background-color: #111111;
+    margin-top: 0px;
+    margin-bottom: 8px;
+    text-align: center;
+}
+header h1 {
+    font-family: serif;
+    font-size: 54px;
+    font-weight: bold;
+    color: #ffffff;
+    height: 65px;
+    padding-bottom: 5px;
+    margin-top: 4px;
+    margin-bottom: 4px;
+}
+p {
+    font-family: sans-serif;
+    font-size: 20px;
+    margin-top: 6px;
+    margin-bottom: 6px;
+}
+li {
+    font-family: sans-serif;
+    font-size: 18px;
+    margin-top: 2px;
+    margin-bottom: 2px;
+}
+#rule-bar {
+    width: 750px;
+    margin-bottom: 0px;
+}
+#rule-bar-button {
+    width: 760px;
+    border: 0px;
+    margin-bottom: 0px;
+    text-align: left;
+    font-family: sans-serif;
+    font-size: 20px;
+    color: white;
+    background-color: #222222;
+}
+#rule-explanation {
+    width: 750px;
+    margin: auto;
+    margin-top: -15px;
+    margin-bottom: -11px;
+    background-color: #777777;
+}
+#game-bar {
+    margin: auto;
+    padding-left: 6px;
+    width: 754px;
+    height: 32px;
+    background-color: #222222;
+    color: white;
+    text-align: left;
+}
+#canvas-container {
+    width: 750px;
+    margin: auto;
+}

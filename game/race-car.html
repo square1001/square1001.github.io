@@ -1,13 +1,42 @@
-<!DOCTYPE html>
-<html>
+﻿<!DOCTYPE html>
+<html lang="ja">
 <head>
 	<title>Race Car Game</title>
+	<link type="text/css" rel="stylesheet" href="css.css" />
+	<meta charset="utf-8" />
+	<script src="js/rule-bar.js"></script>
 </head>
 <body>
-	<h1>Simple Race Car Game</h1>
-	<canvas id="cvs" height="500" width="750" style="border: 1px solid black;">
-		This browser does not support HTML canvas.
-	</canvas>
+	<header>
+		<h1>SIMPLE RACE CAR GAME</h1>
+	</header>
+	<article>
+		<div style="text-align: center">
+			<button id="rule-bar-button" style="align-self: center;" onclick="change_open()">
+				<div id="rule-bar">
+					▼ ルール説明
+				</div>
+			</button>
+		</div>
+		<div id="rule-explanation" style="display: none">
+			<ul>
+				<li>あなたはレースカーを10000メートル走らせます。</li>
+				<li>左右キーを使って、黒いレースカーを左右に移動することができます。</li>
+				<li>他の車にできるだけ当たらないようにします。他の車に衝突すると、レースカーの速度が落ちます。</li>
+				<li>コインを取ると、スコアが50増えます。</li>
+				<li>ブーストを取ると、5秒間速度が1.2倍に+加速度が増え、スコアが500増えます。</li>
+				<li>最終的なスコアはゴール時間によっても左右されます。</li>
+			</ul>
+		</div>
+		<div id="game-bar">
+				<p>▼ ゲーム</p>
+		</div>
+		<div id="canvas-container">
+			<canvas id="cvs" height="500" width="750">
+				This browser does not support HTML canvas.
+			</canvas>
+		</div>
+	</article>
 	<script src="js/race-car.js"></script>
 </body>
 </html>

@@ -314,6 +314,7 @@ function draw_start() {
 	context.textAlign = "center";
 	context.fillText("Simple Race Car Game", 375, 140);
 	context.font = "35px sans-serif";
+	context.fillStyle = "#ffffff";
 	context.fillText("Play", 375, 284);
 	context.fillText("Ranking", 375, 364);
 	context.fillText("Quit", 375, 444);
@@ -356,6 +357,7 @@ function drawranking() {
 		context.textAlign = "right";
 		context.fillText(res[i], 550, 210 + i * 50);
 	}
+	context.fillStyle = "#ffffff";
 	context.fillText("Back", 375, 444);
 }
 

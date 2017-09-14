@@ -287,7 +287,7 @@ function set_ranking(x) {
 	var str = res.join(',');
 	var dt = new Date();
 	dt.setTime(dt.getTime() + (365 * 24 * 60 * 60 * 1000))
-	document.cookie = "data=" + encodeURIComponent(x) + "; expires=" + dt.toUTCString();
+	document.cookie = "data=" + encodeURIComponent(res) + "; expires=" + dt.toUTCString();
 }
 
 // --- DRAW: START SCREEN --- //

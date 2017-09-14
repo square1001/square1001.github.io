@@ -353,10 +353,11 @@ function drawranking() {
 	var res = get_ranking();
 	for (var i = 0; i < 5 && i < res.length; i++) {
 		context.textAlign = "left";
-		context.fillText((i + 1) + "th:", 200, 210 + i * 50);
+		context.fillText((i + 1) + "th:", 200, 190 + i * 50);
 		context.textAlign = "right";
-		context.fillText(res[i], 550, 210 + i * 50);
+		context.fillText(res[i], 550, 190 + i * 50);
 	}
+	context.textAlign = "center";
 	context.fillStyle = "#ffffff";
 	context.fillText("Back", 375, 444);
 }

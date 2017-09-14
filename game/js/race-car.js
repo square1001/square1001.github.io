@@ -8,7 +8,8 @@ var IMG_SRC_ARRAY = [
 	"car_blue.png",
 	"goal.png",
 	"coin.png",
-	"boost.png"
+	"boost.png",
+	"startpage.png"
 ];
 var IMG_COUNT = IMG_SRC_ARRAY.length;
 var IMG_CURRENT_COUNT = 0;
@@ -20,6 +21,7 @@ var IMG_CAR_BLUE;
 var IMG_GOAL;
 var IMG_COIN;
 var IMG_BOOST;
+var IMG_STARTPAGE;
 var MOVE_INTERVAL_VALUE;
 var GOAL = 10000; // meter
 var MOVE_PER_SEC = 50; // FPS
@@ -62,17 +64,19 @@ IMG_CAR_BLUE = IMG_ARRAY[4];
 IMG_GOAL = IMG_ARRAY[5];
 IMG_COIN = IMG_ARRAY[6];
 IMG_BOOST = IMG_ARRAY[7];
-
-//document.cookie = "data=12345";
+IMG_STARTPAGE = IMG_ARRAY[8];
 
 // --- MOUSEDOWN FUNCTION --- //
 document.onmousedown = function (event) {
 	var sx = event.pageX - cvs.offsetLeft;
 	var sy = event.pageY - cvs.offsetTop;
 	if (STATE == 0) {
-		if (220 <= sx && sx <= 480 && 240 <= sy && sy <= 300) game_start();
-		if (220 <= sx && sx <= 480 && 320 <= sy && sy <= 380) drawranking();
-		if (220 <= sx && sx <= 480 && 400 <= sy && sy <= 460) window.close();
+		if (245 <= sx && sx <= 505 && 240 <= sy && sy <= 300) game_start();
+		if (245 <= sx && sx <= 505 && 320 <= sy && sy <= 380) ranking_page();
+		if (245 <= sx && sx <= 505 && 400 <= sy && sy <= 460) window.close();
+	}
+	if (STATE == 3 || STATE == 4) {
+		if (245 <= sx && sx <= 505 && 400 <= sy && sy <= 460) start_page();
 	}
 }
 
@@ -86,9 +90,6 @@ document.onkeydown = function (event) {
 		dir = MAX_DEGREE;
 		row_fixed++;
 	}
-	if (event.keyCode == 32) {
-		if (STATE == 3) init();
-	}
 }
 
 // --- SPEED FUNCTION --- //
@@ -101,6 +102,11 @@ function init() {
 	STATE = -1;
 	cvs = document.getElementById("cvs");
 	context = cvs.getContext("2d");
+	start_page();
+}
+
+// --- START PAGE --- // 
+function start_page() {
 	STATE = 0;
 	draw_start();
 }
@@ -120,6 +126,12 @@ function game_end() {
 	time_bonus = Math.floor((0.032 * GOAL * GOAL) / ((moves / MOVE_PER_SEC) - GOAL / (600 / 3.6) * 0.3));
 	set_ranking(score + time_bonus);
 	draw_end();
+}
+
+// --- RANKING PAGE --- //
+function ranking_page() {
+	STATE = 4;
+	drawranking();
 }
 
 // --- INITIALIZE VARIABLES --- //
@@ -292,32 +304,28 @@ function set_ranking(x) {
 
 // --- DRAW: START SCREEN --- //
 function draw_start() {
-	context.fillStyle = "#9999ff";
-	context.fillRect(0, 0, 750, 500);
-	context.fillStyle = "#bbbbff";
-	context.strokeStyle = "#bb66ff";
-	context.fillRect(220, 240, 260, 60);
-	context.strokeRect(220, 240, 260, 60);
-	context.fillRect(220, 320, 260, 60);
-	context.strokeRect(220, 320, 260, 60);
-	context.fillRect(220, 400, 260, 60);
-	context.strokeRect(220, 400, 260, 60);
+	context.drawImage(IMG_STARTPAGE, 0, 0, 750, 500);
+	context.fillStyle = "#555555";
+	context.fillRect(245, 240, 260, 60);
+	context.fillRect(245, 320, 260, 60);
+	context.fillRect(245, 400, 260, 60);
 	context.fillStyle = "#333333";
 	context.font = "normal bold 55px sans-serif";
 	context.textAlign = "center";
 	context.fillText("Simple Race Car Game", 375, 140);
-	context.font = "normal normal 35px sans-serif";
-	context.fillText("Play", 350, 284);
-	context.fillText("Ranking", 350, 364);
-	context.fillText("Quit", 350, 444);
+	context.font = "35px sans-serif";
+	context.fillText("Play", 375, 284);
+	context.fillText("Ranking", 375, 364);
+	context.fillText("Quit", 375, 444);
 }
 
 // --- DRAW: RESULT SCREEN --- //
 function draw_end() {
-	context.clearRect(0, 0, 750, 500);
 	context.globalAlpha = 0.3;
 	draw();
 	context.globalAlpha = 1.0;
+	context.fillStyle = "#555555";
+	context.fillRect(245, 400, 260, 60);
 	context.fillStyle = "#333333";
 	context.font = "normal bold 45px sans-serif";
 	context.textAlign = "center";
@@ -326,13 +334,16 @@ function draw_end() {
 	context.fillText("Score: " + score, 375, 200);
 	context.fillText("Time Bonus: " + time_bonus, 375, 250);
 	context.fillText("Total Score: " + (score + time_bonus), 375, 330);
-	context.fillText("Press Space Key to End", 375, 440);
+	context.font = "35px sans-serif";
+	context.fillStyle = "#ffffff";
+	context.fillText("Back", 375, 444);
 }
 
 // --- DRAW: RANKING SCREEN --- //
 function drawranking() {
-	context.fillStyle = "#9999ff";
-	context.fillRect(0, 0, 750, 500);
+	context.drawImage(IMG_STARTPAGE, 0, 0, 750, 500);
+	context.fillStyle = "#555555";
+	context.fillRect(245, 400, 260, 60);
 	context.fillStyle = "#333333";
 	context.font = "normal bold 55px sans-serif";
 	context.textAlign = "center";
@@ -341,10 +352,11 @@ function drawranking() {
 	var res = get_ranking();
 	for (var i = 0; i < 5 && i < res.length; i++) {
 		context.textAlign = "left";
-		context.fillText((i + 1) + "th:", 200, 240 + i * 50);
+		context.fillText((i + 1) + "th:", 200, 210 + i * 50);
 		context.textAlign = "right";
-		context.fillText(res[i], 550, 240 + i * 50);
+		context.fillText(res[i], 550, 210 + i * 50);
 	}
+	context.fillText("Back", 375, 444);
 }
 
 // --- DRAW: GAME SCREEN --- //

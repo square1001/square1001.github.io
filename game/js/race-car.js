@@ -9,7 +9,7 @@ var IMG_SRC_ARRAY = [
 	"goal.png",
 	"coin.png",
 	"boost.png",
-	"startpage.png"
+	"startpage.PNG"
 ];
 var IMG_COUNT = IMG_SRC_ARRAY.length;
 var IMG_CURRENT_COUNT = 0;

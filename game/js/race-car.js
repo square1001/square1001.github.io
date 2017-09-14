@@ -1,18 +1,6 @@
-var cvs;
-var context;
-var dist, cleared;
-var row, row_fixed;
-var moves, cnt;
-var dir;
-var score, time_bonus;
-var speed_var;
-var get_coins;
-var boost, get_boosts;
-var mobx, mobr, mobc, mobf;
-var coinx, coinr, coinf;
-var boostx, boostr, boostf;
+// --- INITIALIZE CONSTANTS --- //
 var IMG_ARRAY = new Array();
-var IMG_SRC_ARRAY = new Array(
+var IMG_SRC_ARRAY = [
 	"highway.png",
 	"car_mine.png",
 	"car_red.png",
@@ -21,7 +9,7 @@ var IMG_SRC_ARRAY = new Array(
 	"goal.png",
 	"coin.png",
 	"boost.png"
-);
+];
 var IMG_COUNT = IMG_SRC_ARRAY.length;
 var IMG_CURRENT_COUNT = 0;
 var IMG_HIGHWAY;
@@ -38,7 +26,24 @@ var MOVE_PER_SEC = 50; // FPS
 var MOB_SPEED = 27 / 3.6; // meter per second
 var MAX_DEGREE = 40 / 180 * Math.PI;
 var BOOST_TIME = 5;
+
+// --- INITIALIZE VARIABLES --- //
 var STATE = -1;
+var cvs;
+var context;
+var dist, cleared;
+var row, row_fixed;
+var moves, cnt;
+var dir;
+var score, time_bonus;
+var speed_var;
+var get_coins;
+var boost, get_boosts;
+var mobx, mobr, mobc, mobf;
+var coinx, coinr, coinf;
+var boostx, boostr, boostf;
+
+// --- SETUP IMAGES --- //
 for (var i = 0; i < IMG_COUNT; i++) {
 	IMG_ARRAY[i] = new Image();
 	IMG_ARRAY[i].src = "img/" + IMG_SRC_ARRAY[i];
@@ -49,6 +54,29 @@ for (var i = 0; i < IMG_COUNT; i++) {
 		}
 	}
 }
+IMG_HIGHWAY = IMG_ARRAY[0];
+IMG_CAR_MINE = IMG_ARRAY[1];
+IMG_CAR_RED = IMG_ARRAY[2];
+IMG_CAR_GREEN = IMG_ARRAY[3];
+IMG_CAR_BLUE = IMG_ARRAY[4];
+IMG_GOAL = IMG_ARRAY[5];
+IMG_COIN = IMG_ARRAY[6];
+IMG_BOOST = IMG_ARRAY[7];
+
+//document.cookie = "data=12345";
+
+// --- MOUSEDOWN FUNCTION --- //
+document.onmousedown = function (event) {
+	var sx = event.pageX - cvs.offsetLeft;
+	var sy = event.pageY - cvs.offsetTop;
+	if (STATE == 0) {
+		if (220 <= sx && sx <= 480 && 240 <= sy && sy <= 300) game_start();
+		if (220 <= sx && sx <= 480 && 320 <= sy && sy <= 380) drawranking();
+		if (220 <= sx && sx <= 480 && 400 <= sy && sy <= 460) window.close();
+	}
+}
+
+// --- KEYDOWN FUNCTION --- //
 document.onkeydown = function (event) {
 	if (event.keyCode == 37 && STATE == 2 && Math.abs(row - row_fixed * 80) < 1.0e-7 && row_fixed >= 1) {
 		dir = -MAX_DEGREE;
@@ -59,45 +87,44 @@ document.onkeydown = function (event) {
 		row_fixed++;
 	}
 	if (event.keyCode == 32) {
-		if (STATE == 0) game_start();
 		if (STATE == 3) init();
 	}
 }
+
+// --- SPEED FUNCTION --- //
 function speed() {
 	return 500 / 3.6 * (1 - Math.pow(0.84, speed_var)) * (boost > 1.0e-7 ? 1.2 : 1);
 }
+
+// --- INITIALIZE CANVAS --- //
 function init() {
 	STATE = -1;
 	cvs = document.getElementById("cvs");
 	context = cvs.getContext("2d");
-	init_img();
 	STATE = 0;
 	draw_start();
 }
+
+// --- GAME START --- //
 function game_start() {
 	STATE = 1;
 	init_var();
 	MOVE_INTERVAL_VALUE = setInterval("move()", 1000 / MOVE_PER_SEC);
 	STATE = 2;
 }
+
+// --- GAME END --- //
 function game_end() {
 	STATE = 3;
 	clearInterval(MOVE_INTERVAL_VALUE);
 	time_bonus = Math.floor((0.032 * GOAL * GOAL) / ((moves / MOVE_PER_SEC) - GOAL / (600 / 3.6) * 0.3));
+	set_ranking(score + time_bonus);
 	draw_end();
 }
-function init_img() {
-	IMG_HIGHWAY = IMG_ARRAY[0];
-	IMG_CAR_MINE = IMG_ARRAY[1];
-	IMG_CAR_RED = IMG_ARRAY[2];
-	IMG_CAR_GREEN = IMG_ARRAY[3];
-	IMG_CAR_BLUE = IMG_ARRAY[4];
-	IMG_GOAL = IMG_ARRAY[5];
-	IMG_COIN = IMG_ARRAY[6];
-	IMG_BOOST = IMG_ARRAY[7];
-}
+
+// --- INITIALIZE VARIABLES --- //
 function init_var() {
-	// --- SET INITIAL VARIABLES --- //
+	// --- set initial variables --- //
 	moves = cnt = 0;
 	dist = 0;
 	cleared = false;
@@ -110,7 +137,7 @@ function init_var() {
 	score = time_bonus = 0;
 	boost = 0;
 
-	// --- SET PLACE OF MOBS --- //
+	// --- set place of mobs --- //
 	mobx = new Array();
 	mobr = new Array();
 	mobc = new Array();
@@ -128,7 +155,7 @@ function init_var() {
 		while (mobr.length >= 2 && mobr[mobr.length - 2] == mobr[mobr.length - 1]) mobr[mobr.length - 1] = Math.floor(Math.random() * 5);
 	}
 
-	// --- SET PLACE OF COINS --- //
+	// --- set place of coins  --- //
 	coinx = new Array();
 	coinr = new Array();
 	coinf = new Array();
@@ -148,7 +175,7 @@ function init_var() {
 		coinf.push(true);
 	}
 
-	// --- SET PLACE OF BOOSTS --- //
+	// --- set place of boosts --- //
 	boostx = new Array();
 	boostr = new Array();
 	boostf = new Array();
@@ -161,6 +188,8 @@ function init_var() {
 		boostf.push(true);
 	}
 }
+
+// --- MOVE ACTION --- //
 function move() {
 	dist += speed() * Math.cos(dir) / MOVE_PER_SEC;
 	row += speed() * 5 * Math.sin(dir) / MOVE_PER_SEC;
@@ -205,6 +234,8 @@ function move() {
 	score = Math.floor(dist * 4 + get_coins * 50 + get_boosts * 500);
 	draw();
 }
+
+// --- COLLISION DETECTION --- //
 function collide_mob() {
 	for (var i = 0; i < mobx.length; i++) {
 		var px = dist - mobx[i], py = row - mobr[i] * 80;
@@ -230,16 +261,58 @@ function collide_boost() {
 	}
 	return -1;
 }
+
+// --- RANKING FUNCTIONS --- //
+function get_cookie(cname) {
+	var name = cname + "=";
+	var str = decodeURIComponent(document.cookie).split(';');
+	for (var i = 0; i < str.length; i++) {
+		while (str[i].length >= 1 && str[i][0] == ' ') str[i] = str[i].substring(1);
+		if (str[i].indexOf(name) == 0) return str[i].substring(name.length, str[i].length);
+	}
+	return "";
+}
+function get_ranking() {
+	var str = get_cookie("data").split(',');
+	var ret = new Array();
+	for (var i = 0; i < str.length; i++) {
+		if(str[i] != "") ret.push(parseInt(str[i]));
+	}
+	return ret;
+}
+function set_ranking(x) {
+	var res = get_ranking();
+	res.push(x);
+	res.sort(function (val1, val2) { return val2 - val1; });
+	var str = res.join(',');
+	var dt = new Date();
+	dt.setTime(dt.getTime() + (365 * 24 * 60 * 60 * 1000))
+	document.cookie = "data=" + encodeURIComponent(x) + "; expires=" + dt.toUTCString();
+}
+
+// --- DRAW: START SCREEN --- //
 function draw_start() {
 	context.fillStyle = "#9999ff";
 	context.fillRect(0, 0, 750, 500);
+	context.fillStyle = "#bbbbff";
+	context.strokeStyle = "#bb66ff";
+	context.fillRect(220, 240, 260, 60);
+	context.strokeRect(220, 240, 260, 60);
+	context.fillRect(220, 320, 260, 60);
+	context.strokeRect(220, 320, 260, 60);
+	context.fillRect(220, 400, 260, 60);
+	context.strokeRect(220, 400, 260, 60);
 	context.fillStyle = "#333333";
 	context.font = "normal bold 55px sans-serif";
 	context.textAlign = "center";
-	context.fillText("Simple Race Car Game", 375, 200);
+	context.fillText("Simple Race Car Game", 375, 140);
 	context.font = "normal normal 35px sans-serif";
-	context.fillText("Press Space Key to Start", 375, 400);
+	context.fillText("Play", 350, 284);
+	context.fillText("Ranking", 350, 364);
+	context.fillText("Quit", 350, 444);
 }
+
+// --- DRAW: RESULT SCREEN --- //
 function draw_end() {
 	context.clearRect(0, 0, 750, 500);
 	context.globalAlpha = 0.3;
@@ -255,11 +328,33 @@ function draw_end() {
 	context.fillText("Total Score: " + (score + time_bonus), 375, 330);
 	context.fillText("Press Space Key to End", 375, 440);
 }
+
+// --- DRAW: RANKING SCREEN --- //
+function drawranking() {
+	context.fillStyle = "#9999ff";
+	context.fillRect(0, 0, 750, 500);
+	context.fillStyle = "#333333";
+	context.font = "normal bold 55px sans-serif";
+	context.textAlign = "center";
+	context.fillText("Ranking", 375, 100);
+	context.font = "35px sans-serif";
+	var res = get_ranking();
+	for (var i = 0; i < 5 && i < res.length; i++) {
+		context.textAlign = "left";
+		context.fillText((i + 1) + "th:", 200, 240 + i * 50);
+		context.textAlign = "right";
+		context.fillText(res[i], 550, 240 + i * 50);
+	}
+}
+
+// --- DRAW: GAME SCREEN --- //
 function draw() {
 	context.clearRect(0, 0, 750, 500);
 	drawroad();
 	drawsidebar();
 }
+
+// --- DRAW: ROAD MAP --- //
 function drawroad() {
 	// --- Draw Map --- //
 	context.drawImage(IMG_HIGHWAY, 0, 200 - (dist * 5) % 200, 500, 500, 0, 0, 500, 500);
@@ -307,6 +402,8 @@ function drawroad() {
 		}
 	}
 }
+
+// --- DRAW: GAME SIDEBAR --- //
 function drawsidebar() {
 	// --- Basic Setup --- //
 	context.strokeStyle = "#ffdd99";

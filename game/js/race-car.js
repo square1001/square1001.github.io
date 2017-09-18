@@ -251,7 +251,7 @@ function move() {
 function collide_mob() {
 	for (var i = 0; i < mobx.length; i++) {
 		var px = dist - mobx[i], py = row - mobr[i] * 80;
-		if (mobf[i] && -20 < px && px < 20 && -50 <= py && py < 50) return i;
+		if (mobf[i] && -19.2 < px && px < 19.2 && -48 <= py && py < 48) return i;
 	}
 	return -1;
 }

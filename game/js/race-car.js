@@ -288,7 +288,7 @@ function get_ranking() {
 	var str = get_cookie("data").split(',');
 	var ret = new Array();
 	for (var i = 0; i < str.length; i++) {
-		if(str[i] != "") ret.push(parseInt(str[i]));
+		if (str[i] != "") ret.push(parseInt(str[i]));
 	}
 	return ret;
 }
@@ -354,9 +354,9 @@ function drawranking() {
 	var suffix = ["st", "nd", "rd", "th", "th"];
 	for (var i = 0; i < 5 && i < res.length; i++) {
 		context.textAlign = "left";
-		context.fillText((i + 1) + suffix[i] + ":", 200, 190 + i * 50);
+		context.fillText((i + 1) + suffix[i] + ":", 200, 160 + i * 50);
 		context.textAlign = "right";
-		context.fillText(res[i], 550, 190 + i * 50);
+		context.fillText(res[i], 550, 160 + i * 50);
 	}
 	context.textAlign = "center";
 	context.fillStyle = "#ffffff";
@@ -406,7 +406,7 @@ function drawroad() {
 	}
 
 	// --- Draw Boosts --- //
-	for(var i = 0; i < boostx.length; i++) {
+	for (var i = 0; i < boostx.length; i++) {
 		var px = dist * 5 - boostx[i] * 5 + 380 + 24;
 		if (boostf[i] && -48 <= px && px <= 500) {
 			context.save();

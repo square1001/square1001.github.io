@@ -14,19 +14,26 @@
 		まず言っておきたいのは、<b>Topcoderは競技プログラミングだけのサイトではなく、さらにDesign、Development、Data Scienceの分野があり</b>、ウェブサイトが必然的に複雑になってしまうということです。なので、今TopcoderのSRMに参加するシンプルな方法や知っておくべきことをここに書きます。
 	</p>
 	<p>
-		<b>これは2018年1月25日時点のものです。数年たったら変化しているかもしれないことにご注意ください。</b>
+		<b>これは2019年7月17日時点のものです。数年たったら変化しているかもしれないことにご注意ください。</b>
 	</p>
 	<h2>1. ユーザー登録</h2>
 	<p>
 		Topcoderのユーザー登録の方法を今から説明します。まず、Topcoderのウェブサイトは <a href="https://www.topcoder.com/">https://www.topcoder.com/</a> です。このページに移動すると、次のような画面が出てきます。
 	</p>
-	<img src="http://preview.ibb.co/mHUVZG/image.png" height="280" />
+	<img src="img/topcoder_index.PNG" height="280" />
 	<p>
-		ユーザー登録をするためには、「I want to join Topcoder」をクリックしてください。その後「Become a member」をクリックすると、次のようなページが出てきます。
+		ユーザー登録をするためには、右上にある「Join Topcoder」のボタンをクリックしてください。
 	</p>
-	<img src="http://image.ibb.co/gskeuG/image.png" height="280" />
 	<p>
-		このページは、<a href="https://accounts.topcoder.com/member/registration">https://accounts.topcoder.com/member/registration</a> という場所です。ここでは、ユーザー登録をするフォームがあり、次の6つを入力しなければなりません。
+		その後「Become a member」をクリックすると、次のようなページが出てきます。
+	</p>
+	<img src="img/topcoder_register.PNG" height="280" />
+	<p>
+		このページは、<a href="https://accounts.topcoder.com/member/registration">https://accounts.topcoder.com/member/registration</a> という場所です。
+	</p>
+	<p>
+		ここでは、ユーザー登録をするフォームがあり、次の6つを入力しなければなりません。
+	</p>
 		<ul>
 			<li>First Name - 名前 (名) を英語表記で</li>
 			<li>Last Name - 苗字 (姓) を英語表記で</li>
@@ -35,6 +42,7 @@
 			<li>Enter your email - Eメールアドレス</li>
 			<li>Create Password - パスワード</li>
 		</ul>
+	<p>
 		その後、入力したメールアドレスに確認用メールが届くと思うのでこれで認証をします。
 	</p>
 	<p>
@@ -42,25 +50,18 @@
 	</p>
 	<h2>2. Topcoder SRM のベース - Topcoder Arena の利用</h2>
 	<p>
-		Topcoder の SRM に参加したり、過去の問題を解いたりするときに、Topcoderの競技プログラミングの競技場 - 「Topcoder Arena」が必要になってきます。最近ウェブサイト上で動く競技場	<a href="https://arena.topcoder.com/">Web Arena</a> もありますが、これはまだ開発段階なので Applet Arena の方を使うことをお勧めします。ここで、Applet Arena の使用方法を説明します。
+		Topcoder の SRM に参加したり、過去の問題を解いたりするときに、Topcoderの競技プログラミングの競技場 - 「Topcoder Arena」が必要になってきます。最近ウェブサイト上で動く競技場	<a href="https://arena.topcoder.com/">Web Arena</a> もありますが、新しいバージョンがまだできていないので、Applet Arena の方を使うことをお勧めします。
+	</p>
+	<p>
+		ここで、Applet Arena の入手方法・使用方法を説明します。
 	</p>
 	<p>
 		まず、Applet Arena を使うためには、<b>Java</b> の環境が必要になってくるので、Java の環境がない人は <a href="https://java.com/en/download/win10.jsp">https://java.com/en/download/win10.jsp</a> などから Java 環境をダウンロードしインストールしましょう。
 	</p>
 	<p>
-		次に、Applet Arena のファイルをダウンロードします。まず、ログインした直後の画面 (Dashboard) は次のようになっています。
+		次に、Applet Arena のファイルをダウンロードします。最新版は <a href="http://www.topcoder.com/contest/arena/ContestAppletProd7.2.jnlp">http://www.topcoder.com/contest/arena/ContestAppletProd7.2.jnlp</a> からダウンロードできます。
 	</p>
-	<img src="http://preview.ibb.co/iP1cWw/image.png" height="280" />
-	<p>
-		ここで「LEARN --> COMPETITIVE PROGRAMMING」の部分をクリックすると、次のような画面が出てきます。
-	</p>
-	<img src="http://preview.ibb.co/nQ5RPG/image.png" height="280" />
-	<p>
-		このページで「LAUNCH APPLET ARENA」をクリックすると、Applet Arena がダウンロードされます。ここからはファイルは手元で開くことができます。
-	</p>
-	<p>
-		次に説明するのは、「セキュリティ設定」についてです。ファイルを開くときに、「セキュリティ設定によってブロックされたアプリケーション」というエラーが発生する場合があります。その場合、スタートメニューから「Java」-->「Javaの構成」をクリックします。すると、「Java コントロールパネル」が開き、「セキュリティ」をクリックしましょう。最後に、「例外サイト・リスト」に「http://www.topcoder.com」を追加します。すると Applet Arena が開けるようになります。
-	</p>
+	<br />
 	<p>
 		Applet Arena を開くと、次のような画面が出てきます。
 	</p>

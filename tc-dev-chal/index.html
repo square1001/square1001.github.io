@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Top10Coder</title>
+		<style>
+			td {
+				padding: 0px;
+				margin: 0px;
+				border: 2px solid black;
+				border-collapse: collapse;
+			}
+			tr {
+				border-collapse: collapse;
+			}
+		</style>
+	</head>
+	<body>
+		<p>It shows top 10 ratings for each competitions.</p>
+		<button onclick="press()">Load!</button>
+		<p id="message" style="color: red"></p>
+		<table id="tbl"></table>
+		<script>
+			function press() {
+				function loadJSON(callback) {   
+					var xobj = new XMLHttpRequest();
+					xobj.overrideMimeType("application/json");
+					xobj.open('GET', 'data.json', true); // Replace 'my_data' with the path to your file
+					xobj.onreadystatechange = function () {
+						if (xobj.readyState == 4 && xobj.status == "200") {
+							// Required use of an anonymous callback as .open will NOT return a value but simply returns undefined in asynchronous mode
+							callback(xobj.responseText);
+						}
+					};
+					xobj.send(null);  
+				}
+				document.getElementById("message").innerHTML = "Loading...";
+				loadJSON(function(response) {
+					var obj = JSON.parse(response)[0];
+					var content = "";
+					content += "<td>Contest ID</td>"
+					content += "<td>Contest Name</td>"
+					for(var i = 0; i < 10; ++i) {
+						content += "<td colspan=\"2\">";
+						content += (i + 1);
+						content += (i == 1 ? "st" : (i == 2 ? "nd" : (i == 3 ? "rd" : "th")));
+						content += "</td>";
+					}
+					for(var x in obj) {
+						var arr = [];
+						for(var y in obj[x]["data"]) {
+							arr.push([obj[x]["data"][y], y]);
+						}
+						arr.sort(function(a, b) {
+							return b[0] - a[0];
+						});
+						content += "<tr>";
+						content += "<td>" + x + "</td>";
+						content += "<td>" + obj[x]["name"] + "</td>";
+						for(var i = 0; i < 10 && i < arr.length; ++i) {
+							content += "<td>" + arr[i][1] + "</td>";
+							content += "<td>" + arr[i][0] + "</td>";
+						}
+						content += "</tr>";
+					}
+					document.getElementById("tbl").innerHTML = content;
+					document.getElementById("message").innerHTML = "Loaded!";
+				});
+			}
+		</script>
+	</body>
+</html>

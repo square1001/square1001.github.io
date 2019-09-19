@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>数研部員と勝負！ 問題 1</title>
+		<style>
+			body {
+				font-family: Arial, Helvetica, sans-serif;
+				font-size: 16px;
+			}
+			td {
+				border: 1px solid black;
+				text-align: center;
+			}
+			input {
+				text-align: center;
+				font-size: 16px;
+			}
+			button {
+				background-color: black;
+				color: white;
+				font-size: 25px;
+			}
+		</style>
+	</head>
+	<body>
+		<p>「数研部員と勝負！2019 問題 1」の判定マシーンです。</p>
+		<br />
+		<table id="triangle-table"></table>
+		<p id="calculate-message" style="color: red"></p>
+		<br />
+		<button onclick="calculate()">Calculate!</button>
+		<script>
+			var n = 12;
+			function is_number(str) {
+				if(/^\+?(0|[1-9]\d*)$/.test(str)) return true;
+				return false;
+			}
+			function fillzero(z) {
+				if(z < 10) return "0" + String(z);
+				return String(z);
+			}
+			function calculate() {
+				var flag = true;
+				for(var i = 1; i <= n; ++i) {
+					var str = document.getElementById("input-" + fillzero(i)).value;
+					if(!is_number(str)) {
+						flag = false;
+					}
+				}
+				if(!flag) {
+					document.getElementById("calculate-message").innerHTML = "すべての入力欄に数字を入れてください。";
+					return;
+				}
+				for(var i = n - 1; i >= 1; --i) {
+					var arr = [];
+					for(var j = 1; j <= i + 1; ++j) {
+						if(i + 1 == n) {
+							arr[j] = parseInt(document.getElementById("input-" + fillzero(j)).value);
+						}
+						else {
+							arr[j] = parseInt(document.getElementById("value-" + fillzero(i + 1) + fillzero(j)).innerHTML);
+						}
+					}
+					for(var j = 1; j <= i; ++j) {
+						document.getElementById("value-" + fillzero(i) + fillzero(j)).innerHTML = arr[j] + arr[j + 1];
+					}
+				}
+				document.getElementById("calculate-message").innerHTML = "";
+			};
+			function print_table() {
+				var content = "";
+				content += "<table style=\"border-collapse: collapse\">";
+				for(var i = 1; i <= n; ++i) {
+					content += "<tr style=\"height: 25px\">";
+					if(i < n) {
+						content += "<td colspan=\"" + (n - i) + "\" style=\"border: white\"></td>";
+					}
+					for(var j = 1; j <= i; ++j) {
+						content += "<td colspan=\"2\" id = \"value-" + fillzero(i) + fillzero(j) + "\">";
+						if(i == n) content += "<input id=\"input-" + fillzero(j) + "\"style=\"width: 50px\"></input>"
+						else content += "?";
+						content += "</td>";
+					}
+					if(i < n) {
+						content += "<td colspan=\"" + (n - i) + "\" style=\"border: white\"></td>";
+					}
+				}
+				document.getElementById("triangle-table").innerHTML = content;
+			}
+			print_table();
+		</script>
+	</body>
+</html>

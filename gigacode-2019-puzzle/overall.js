@@ -14,7 +14,7 @@ nav_content += "<td>";
 nav_content += "<p>GIGACODE 2019 - ALGORITHM PUZZLE</p>";
 nav_content += "</td>";
 nav_content += "<td style=\"padding-left: 50px\">";
-nav_content += "<a href=\"../index.html\">(メインページへ戻る)</a>"
+nav_content += "<a href=\"/gigacode-2019-puzzle/index.html\">(メインページへ戻る)</a>"
 nav_content += "</td>";
 nav_content += "</tr>";
 nav_content += "</tbody>";

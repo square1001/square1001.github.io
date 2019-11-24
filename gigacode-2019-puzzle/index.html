@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>ALGORITHM PUZZLE - GIGACODE 2019</title>
+		<link type="text/css" rel="stylesheet" href = "css.css" />
+		<meta charset="utf-8" />
+	</head>
+	<body>
+		<nav id="nav-bar"></nav>
+		<div id="clock-div" style="margin: 0px; border: 0px; padding: 0px; background-color: #888888; width: 100%; text-align: right"></div>
+		<div id="main" style="padding: 25px">
+			<h3>アルゴリズム・パズルについて</h3>
+			<p>アルゴリズム・パズルは、「アルゴリズムとは何か」、「アルゴリズムの面白さとは何か」、パソコンを使わずに手で体感できるパズルを解くことができる企画です！競技プログラミングにおける初心者でも上級者でも楽しむことができます！</p>
+			<br />
+			<h3>コンテストのルール</h3>
+			<p>コンテストのルールは、以下のようになっています。</p>
+			<ul>
+				<li>15 分間にわたって行われる。</li>
+				<li>問題は 1 問につき 100 点満点であり、良い答えを出した方が点数が高い。</li>
+				<li>問題は 3 問あるので、合計 300 点満点となる。</li>
+				<li>問題を解く際に、プログラミングを用いてはならない。</li>
+				<li><span style="color: red">不正をしないこと。</span>不正をすると、アルゴリズムパズル開発者の負担が増えるのでよろしくないです。</li>
+			</ul>
+			<br />
+			<h3>問題文</h3>
+			<p id="problem-statement">問題文は、試験開始になったら <a href="https://twitter.com/GigaCode2019" target="_blank">GigaCode 2019 の公式ツイッター</a> のツイートによって公開されます。</p>
+			<h3>問題セット</h3>
+			<p id="problem-set-message"></p>
+			<table id="problem-set-table">
+				<tbody>
+					<tr id="problem-set-row0">
+						<td><b>＃</b></td>
+						<td><b>問題名</b></td>
+						<td><b>得点</b></td>
+						<td><b>残り回数</b></td>
+					</tr>
+					<tr id="problem-set-row1">
+						<td>問題 1</td>
+						<td>					
+							<a href="problem-1/problem-1.html">銃士の迷路</a>
+						</td>
+						<td><span id="highscore-1"></span> ／ 100 点</td>
+						<td>-</td>
+					</tr>
+					<tr id="problem-set-row2">
+						<td>問題 2</td>
+						<td>					
+							<a href="problem-2/problem-2.html">ギガコード君を探せ！</a>
+						</td>
+						<td><span id="highscore-2"></span> ／ 100 点</td>
+						<td>残り <span id="remain-2"></span> 回</td>
+					</tr>
+					<tr id="problem-set-row3">
+						<td>問題 3</td>
+						<td>					
+							<a href="problem-3/problem-3.html">給料日</a>
+						</td>
+						<td><span id="highscore-3"></span> ／ 100 点</td>
+						<td>-</td>
+					</tr>
+					<tr id="problem-set-row4">
+						<td>合計点</td>
+						<td colspan="3">
+							<span id="total-score"></span> ／ 300 点（<a id="tweet-link" target="_blank">結果をツイート</a>）
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<script src="overall.js"></script>
+		<script src="index.js"></script>
+	</body>
+</html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>問題 1 - 銃士の迷路</title>
+		<link type="text/css" rel="stylesheet" href = "../css.css" />
+		<meta charset="utf-8" />
+	</head>
+	<body>
+		<nav id="nav-bar"></nav>
+		<div id="clock-div" style="margin: 0px; border: 0px; padding: 0px; background-color: #888888; width: 100%; text-align: right"></div>
+		<div id="main" style="padding: 6px">
+			<h2>問題 1 - 銃士の迷路</h2>
+			<div id="description" style="margin: 20px; border: 2px solid black; padding: 7px">
+				<h3>操作説明</h3>
+				<p>操作方法は、次のようになっています。</p>
+				<ul>
+					<li>下にある上下左右のボタンを押すと、銃士の向きが変えるか、銃士を今向いている方向に移動できます。</li>
+					<li>「●」のボタンを押すと、銃弾が今銃士が向いている方向に向けて発射されます。発射すると、木に当たった場合木を消して銃弾は消えます。</li>
+				</ul>
+			</div>
+			<div id="canvas-container" style="float: left; height: 500px; width: 500px">
+				<canvas id="cvs" height="500" width="500">
+					This browser does not support HTML canvas.
+				</canvas>
+			</div>
+			<div id="game-controller" style="float: left; width: 350px; margin: 20px; border: 2px solid black; padding: 7px">
+				<h3>現在の状況</h3>
+				<p>現在の最高得点、銃の発射回数、移動回数は以下のようになっています。</p>
+				<ul>
+					<li>最高得点：<span id="highest-score" style="color: red"></span> 点</li>
+					<li>銃の発射回数：<span id="firing-count" style="color: red"></span> 回</li>
+					<li>移動回数：<span id="moving-count" style="color: red"></span> 回</li>
+				</ul>
+				<p id="cleared-message" style="color: red"></p>
+				<br />
+				<h3>コントローラー</h3>
+				<p>以下のボタンを使ってアルゴリズムパズルをプレイしてください。</p>
+				<table style="height: 150px; width: 100%">
+					<tr>
+						<td id="controller-left" style="width: 175px; text-align: center; vertical-align: middle">
+							<table style="margin: 5px; border-collapse: collapse">
+								<tr>
+									<td></td>
+									<td style="border: 1px solid black"><button onclick="move_up()" style="height: 35px; width: 40px">▲</button></td>
+									<td></td>
+								</tr>
+								<tr>
+									<td style="border: 1px solid black"><button onclick="move_left()" style="height: 35px; width: 40px">◀</button></td>
+									<td style="border: 1px solid black"><button onclick="fire_gun()" move_style="height: 35px; width: 40px">●</button></td>
+									<td style="border: 1px solid black"><button onclick="move_right()" style="height: 35px; width: 40px">▶</button></td>
+								</tr>
+								<tr>
+									<td></td>
+									<td style="border: 1px solid black"><button onclick="move_down()" style="height: 35px; width: 40px">▼</button></td>
+									<td></td>
+								</tr>
+							</table>
+						</div>
+						<td id="controller-right" style="width: 175px; text-align: center; vertical-align: middle;">
+							<button onclick="reset()" style="background-color: green">やり直し</button>
+						</td>
+					</tr>
+				</div>
+			</table>
+		</div>
+		<script src="../overall.js"></script>
+		<script src="problem-1.js"></script>
+	</body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>問題 2 - ギガコード君を探せ！</title>
+		<link type="text/css" rel="stylesheet" href = "../css.css" />
+		<meta charset="utf-8" />
+	</head>
+	<body>	
+		<nav id="nav-bar"></nav>
+		<div id="clock-div" style="margin: 0px; border: 0px; padding: 0px; background-color: #888888; width: 100%; text-align: right"></div>
+		<div id="main" style="padding: 6px">
+			<h2>問題 2 - ギガコード君を探せ！</h2>
+			<div id="description" style="margin: 20px; border: 2px solid black; padding: 7px">
+				<h3>操作説明</h3>
+				<p>操作方法は、次のようになっています。</p>
+				<ul>
+					<li>質問モード：更地のマスをクリックすると家が建てられ、家のマスをクリックすると更地になります。家は同時に 9 軒までしか建っている状態にできません。「質問！」を押すと、犬がギガコード君の場所にたどり着けるかが分かります。</li>
+					<li>解答モード：更地のマスをクリックすると旗が建てられ、旗のマスをクリックすると更地になります。旗は同時に 1 個までしか建っている状態にできません。「解答！」を押すと、ギガコード君の居場所が旗の場所と同じか判定されます。</li>
+				</ul>
+			</div>
+			<div id="canvas-container" style="float: left; height: 500px; width: 500px">
+				<canvas id="cvs" height="500" width="500">
+					This browser does not support HTML canvas.
+				</canvas>
+			</div>
+			<div id="game-controller" style="float: left; width: 350px; margin: 20px; border: 2px solid black; padding: 7px">
+				<h3>現在の状況</h3>
+				<p>現在の最高得点、現在の質問回数は以下のようになっています。</p>
+				<ul>
+					<li>最高得点：<span id="highest-score" style="color: red"></span> 点</li>
+					<li>現在の質問回数：<span id="question-count" style="color: red"></span> 回</li>
+				</ul>
+				<p id="query-message" style="color: red"></p>
+				<br />
+				<h3>コントローラー</h3>
+				<p>以下のボタンを押すと、「質問」できたり、「モードの切り替え」ができたり、「最初からやり直し」できたりします。</p>
+				<table>
+					<tr style="text-align: center">
+						<td>
+							<button id="submit-button" onclick="query()" style="width: 330px;">質問！</button>
+						</td>
+					</tr>
+					<tr style="text-align: center">
+						<td>
+							<button id="mode-switch-button" onclick="switch_mode()" style="width: 330px;"></button>
+						</td>
+					</tr>
+					<tr style="text-align: center">
+						<td>
+							<button onclick="reset()" style="width: 330px">もう一度 (残り <span id="remain-count" style="color: red"></span> 回)</button>
+						</td>
+					</tr>
+				</table>
+			</table>
+		</div>
+		<script src="../overall.js"></script>
+		<script src="problem-2.js"></script>
+	</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>問題 3 - 給料日</title>
+		<link type="text/css" rel="stylesheet" href = "../css.css" />
+		<meta charset="utf-8" />
+	</head>
+	<body>	
+		<nav id="nav-bar"></nav>
+		<div id="clock-div" style="margin: 0px; border: 0px; padding: 0px; background-color: #888888; width: 100%; text-align: right"></div>
+		<div id="main" style="padding: 6px">
+			<h2>問題 3 - 給料日</h2>
+			<div id="description" style="margin: 20px; border: 2px solid black; padding: 7px">
+				<h3>操作説明</h3>
+				<p>操作方法は、次のようになっています。</p>
+				<ul>
+					<li>最初画面の下の方に 24 枚の紙幣が置かれていて、プレイヤーはこれを C 君、O 君、D 君、E 君それぞれの右にある細長い長方形のところにドラッグ (左クリック → マウス移動) で乗せます。</li>
+					<li>全員 1,000 ドル以上配っている状態になり解答する場合は、「解答！」ボタンを押してください。</li>
+					<li>最初の紙幣の配置からやり直したい場合は、「やり直し」ボタンを押してください。</li>
+				</ul>
+			</div>
+			<div id="canvas-container" style="float: left; height: 500px; width: 500px">
+				<canvas id="cvs" height="500" width="500">
+					This browser does not support HTML canvas.
+				</canvas>
+			</div>
+			<div id="game-controller" style="float: left; width: 350px; margin: 20px; border: 2px solid black; padding: 7px">
+				<h3>現在の状況</h3>
+				<p>現在の最高得点、現在の合計金額は以下のようになっています。</p>
+				<ul>
+					<li>最高得点：<span id="highest-score" style="color: red"></span> 点</li>
+					<li>合計金額：<span id="total-money" style="color: red"></span> ドル</li>
+				</ul>
+				<p id="query-message" style="color: red"></p>
+				<br />
+				<h3>コントローラー</h3>
+				<p>以下のボタンを押すと、「解答」できたり、「最初からやり直し」できたりします。</p>
+				<table>
+					<tr style="text-align: center">
+						<td>
+							<button id="submit-button" onclick="answer()" style="width: 330px;">解答！</button>
+						</td>
+					</tr>
+					<tr style="text-align: center">
+						<td>
+							<button onclick="reset()" style="width: 330px">やり直し</button>
+						</td>
+					</tr>
+				</table>
+			</table>
+		</div>
+		<script src="../overall.js"></script>
+		<script src="problem-3.js"></script>
+	</body>
+</html>

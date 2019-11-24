@@ -1,6 +1,6 @@
 // ---- Contest Durations ---- //
-const start_time = new Date("2019-11-24T16:55:00+09:00");
-const finish_time = new Date("2019-11-24T17:10:00+09:00");
+const start_time = new Date("2019-11-24T17:00:00+09:00");
+const finish_time = new Date("2019-11-24T17:15:00+09:00");
 
 // ---- Top Bar ---- //
 var nav_content = "";

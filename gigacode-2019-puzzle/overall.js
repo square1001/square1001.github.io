@@ -8,7 +8,7 @@ nav_content += "<table>";
 nav_content += "<tbody>"
 nav_content += "<tr>";
 nav_content += "<td>";
-nav_content += "<img src=\"../img/gigacode2019-logo.jpg\" style=\"float: left; height: 50px; width: 50px\"></img>";
+nav_content += "<img src=\"/gigacode-2019/img/gigacode2019-logo.jpg\" style=\"float: left; height: 50px; width: 50px\"></img>";
 nav_content += "</td>";
 nav_content += "<td>";
 nav_content += "<p>GIGACODE 2019 - ALGORITHM PUZZLE</p>";

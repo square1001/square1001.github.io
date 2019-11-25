@@ -99,7 +99,7 @@ setInterval("clock_update()", 500);
 clock_update();
 
 // ---- Others ---- //
-const PLAY_LIMIT = 5; // PLAY LIMIT FOR PROBLEM 2
+const PLAY_LIMIT = 10000; // PLAY LIMIT FOR PROBLEM 2
 function get_cookie(cname) {
 	var name = cname + "=";
 	var str = decodeURIComponent(document.cookie).split(';');

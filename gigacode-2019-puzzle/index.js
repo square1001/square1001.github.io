@@ -3,7 +3,6 @@ document.getElementById("highscore-2").innerHTML = get_highest_score(2);
 document.getElementById("highscore-3").innerHTML = get_highest_score(3);
 var sum = get_highest_score(1) + get_highest_score(2) + get_highest_score(3);
 document.getElementById("total-score").innerHTML = sum;
-document.getElementById("remain-2").innerHTML = PLAY_LIMIT - get_played_count(3);
 var tweet_text = "";
 tweet_text += "GigaCode 2019「アルゴリズム・パズル」結果" + "%0A";
 tweet_text += "問題 1「銃士の迷路」：" + get_highest_score(1) + " 点" + "%0A";

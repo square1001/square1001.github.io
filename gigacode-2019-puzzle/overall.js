@@ -1,6 +1,6 @@
 // ---- Contest Durations ---- //
 const start_time = new Date("2019-11-24T17:00:00+09:00");
-const finish_time = new Date("2019-11-24T17:15:00+09:00");
+const finish_time = new Date("2029-11-24T17:15:00+09:00");
 
 // ---- Top Bar ---- //
 var nav_content = "";
@@ -8,7 +8,7 @@ nav_content += "<table>";
 nav_content += "<tbody>"
 nav_content += "<tr>";
 nav_content += "<td>";
-nav_content += "<img src=\"/gigacode-2019/img/gigacode2019-logo.jpg\" style=\"float: left; height: 50px; width: 50px\"></img>";
+nav_content += "<img src=\"/gigacode-2019-puzzle/img/gigacode2019-logo.jpg\" style=\"float: left; height: 50px; width: 50px\"></img>";
 nav_content += "</td>";
 nav_content += "<td>";
 nav_content += "<p>GIGACODE 2019 - ALGORITHM PUZZLE</p>";

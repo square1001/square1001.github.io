@@ -1,6 +1,7 @@
 document.getElementById("highscore-1").innerHTML = get_highest_score(1);
 document.getElementById("highscore-2").innerHTML = get_highest_score(2);
 document.getElementById("highscore-3").innerHTML = get_highest_score(3);
+document.getElementById("remain-plays").innerHTML = PLAY_LIMIT - get_played_count();
 var sum = get_highest_score(1) + get_highest_score(2) + get_highest_score(3);
 document.getElementById("total-score").innerHTML = sum;
 var tweet_text = "";
@@ -15,3 +16,12 @@ var tweet_link = "";
 tweet_link += "https://twitter.com/intent/tweet?text=";
 tweet_link += tweet_text;
 document.getElementById("tweet-link").href = tweet_link;
+function reset_results() {
+	var dt = new Date();
+	dt.setTime(dt.getTime() - 1000);
+	document.cookie = "highscore1=" + "; expires=" + dt.toUTCString() + "; path=/";
+	document.cookie = "highscore2=" + "; expires=" + dt.toUTCString() + "; path=/";
+	document.cookie = "highscore3=" + "; expires=" + dt.toUTCString() + "; path=/";
+	document.cookie = "playedcnt2=" + "; expires=" + dt.toUTCString() + "; path=/";
+	location.reload();
+}

@@ -23,7 +23,12 @@
 			</ul>
 			<br />
 			<h3>問題文</h3>
-			<p id="problem-statement">問題文は、試験開始になったら <a href="https://twitter.com/GigaCode2019" target="_blank">GigaCode 2019 の公式ツイッター</a> のツイートによって公開されます。</p>
+			<p id="problem-statement">
+				問題文は、<a href="https://drive.google.com/file/d/1Vt-pndym3uHiH0MYaEW2Q7tI9MFrfyIX/view" target="_blank">このリンク</a>をクリックすると見ることができます。
+			</p>
+			<!--
+				<p id="problem-statement">問題文は、試験開始になったら <a href="https://twitter.com/GigaCode2019" target="_blank">GigaCode 2019 の公式ツイッター</a> のツイートによって公開されます。</p>
+			-->
 			<h3>問題セット</h3>
 			<p id="problem-set-message"></p>
 			<table id="problem-set-table">
@@ -32,6 +37,7 @@
 						<td><b>＃</b></td>
 						<td><b>問題名</b></td>
 						<td><b>得点</b></td>
+						<td><b>残り回数</b></td>
 					</tr>
 					<tr id="problem-set-row1">
 						<td>問題 1</td>
@@ -39,6 +45,7 @@
 							<a href="problem-1/problem-1.html">銃士の迷路</a>
 						</td>
 						<td><span id="highscore-1"></span> ／ 100 点</td>
+						<td>-</td>
 					</tr>
 					<tr id="problem-set-row2">
 						<td>問題 2</td>
@@ -46,6 +53,7 @@
 							<a href="problem-2/problem-2.html">ギガコード君を探せ！</a>
 						</td>
 						<td><span id="highscore-2"></span> ／ 100 点</td>
+						<td>残り <span id="remain-plays"></span> 回</td>
 					</tr>
 					<tr id="problem-set-row3">
 						<td>問題 3</td>
@@ -53,15 +61,18 @@
 							<a href="problem-3/problem-3.html">給料日</a>
 						</td>
 						<td><span id="highscore-3"></span> ／ 100 点</td>
+						<td>-</td>
 					</tr>
 					<tr id="problem-set-row4">
 						<td>合計点</td>
-						<td colspan="2">
+						<td colspan="3">
 							<span id="total-score"></span> ／ 300 点（<a id="tweet-link" target="_blank">結果をツイート</a>）
 						</td>
 					</tr>
 				</tbody>
 			</table>
+			<br />
+			<button id="reset-button" style="margin-left: 20px" onclick="reset_results()">結果をリセット</button>
 		</div>
 		<script src="overall.js"></script>
 		<script src="index.js"></script>

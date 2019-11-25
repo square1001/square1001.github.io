@@ -75,10 +75,12 @@ function clock_update() {
 	if(window.location.pathname == "/gigacode-2019-puzzle/index.html") {
 		if(visible_problemset) {
 			document.getElementById("problem-set-table").style.display = "table";
+			document.getElementById("reset-button").style.display = "block";
 			document.getElementById("problem-set-message").innerHTML = "問題は、以下の 3 問となっております。";
 		}
 		else {
 			document.getElementById("problem-set-table").style.display = "none";
+			document.getElementById("reset-button").style.display = "none";
 			document.getElementById("problem-set-message").innerHTML = "問題は、コンテスト開始してから公開されます。";
 		}
 	}
@@ -99,7 +101,7 @@ setInterval("clock_update()", 500);
 clock_update();
 
 // ---- Others ---- //
-const PLAY_LIMIT = 10000; // PLAY LIMIT FOR PROBLEM 2
+const PLAY_LIMIT = 5; // PLAY LIMIT FOR PROBLEM 2
 function get_cookie(cname) {
 	var name = cname + "=";
 	var str = decodeURIComponent(document.cookie).split(';');

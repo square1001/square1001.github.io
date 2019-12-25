@@ -1,0 +1,140 @@
+body {
+	margin: 12px;
+	font-family: Arial, Helvetica, sans-serif;
+}
+h2 {
+	margin: 12px 0px 12px 6px;
+	font-size: 36px;
+	color: #000000;
+}
+h3 {
+	margin: 8px 0px 8px 4px;
+	font-size: 23px;
+	color: #080808;
+	border-left: 10px solid #333333;
+	border-bottom: 3px solid #777777;
+	padding-left: 12px;
+}
+p {
+	margin: 0px 0px 0px 4px;
+	border: 0px;
+	padding: 0px;
+	font-size: 15px;
+	color: #111111;
+	text-indent: 15px;
+	word-break: break-all;
+}
+ul {
+	margin: 6px 0px 6px 0px;
+}
+li {
+	margin: 0px 0px 0px 4px;
+	border: 0px;
+	padding: 0px;
+	font-size: 15px;
+	color: #111111;
+	word-break: break-all;
+}
+.side-bar {
+	height: 100%;
+	width: 160px;
+	position: fixed;
+	z-index: 1;
+	top: 0;
+	left: 0;
+	background-color: #333333;
+	overflow: hidden;
+}
+.side-bar-table {
+	width: 100%;
+	border-collapse: collapse;
+}
+.side-bar-table>tbody>tr {
+	margin: 0px;
+}
+.side-bar-table>tbody>tr>td {
+	margin: 0px;
+	border: 0px;
+	padding: 0px;
+	vertical-align: middle;
+}
+.side-bar-table>tbody>tr>td>a {
+	display: inline-block;
+	border: 0px;
+	padding: 14px 8px 14px 0px;
+	text-decoration: none;
+	color: white;
+	vertical-align: middle;
+	font-size: 18px;
+	width: 100%;
+}
+.side-bar-table>tbody>tr>td>a>img {
+	display: block;
+	float: left;
+	margin: -5px 6px -5px 2px;
+	width: 30px;
+	height: 30px;
+	color: white;
+}
+.side-bar-table>tbody>tr>td>a:hover {
+	background-color: #888888;
+}
+.main {
+	display: block;
+	margin-left: 160px;
+}
+#editing-space {
+	display: inline-block;
+	width: calc(100% - 40px);
+	font-size: 16px;
+	margin: 10px 10px 0px 10px;
+	border: 5px solid #333333;
+	padding: 7px;
+}
+#editing-messages {
+	display: inline-block;
+	width: calc(100% - 40px + 14px + 10px);
+	font-size: 16px;
+	margin: 0px 10px 10px 10px;
+	background-color: #111111;
+	vertical-align: middle;
+}
+#run-button {
+	display: block;
+	float: left;
+	margin: 9px;
+	border: 2px solid #444444;
+	padding: 3px 11px 3px 11px;
+	background-color: #444444;
+	color: #FFFFFF;
+	font-size: 22px;
+}
+#run-button:active {
+	background-color: #888888;
+}
+#editing-message {
+	margin: 14px 0px 14px 0px;
+	font-size: 18px;
+}
+.number-input {
+	font-size: 15px;
+}
+#cvs {
+	margin: 15px;
+}
+.controller-bar {
+	margin: 7px;
+	border-collapse: collapse;
+}
+.controller-bar>tbody>tr>td {
+	padding: 6px 11px 6px 11px;
+	border: 1px solid #777777;
+	text-align: center;
+	vertical-align: middle;
+}
+#num-iters-print {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 15px;
+	width: 60px;
+	text-align: center;
+}

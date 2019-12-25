@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>パ研合宿 2019「Painter Programming」</title>
+		<link type="text/css" rel="stylesheet" href = "css.css" />
+		<meta charset="utf-8" />
+	</head>
+	<body>
+		<div class="side-bar">
+			<table class="side-bar-table">
+				<tbody>
+					<tr><td style="font-size: 26px; background-color: #000000; color: white; text-align: center; vertical-align: middle; height: 72px">Menu</td></tr>
+					<tr><td><a href="javascript:void(0);" onclick="switch_screen(0)"><img src="./img/home.svg"></img>About / Rules</a></td></tr>
+					<tr><td><a href="javascript:void(0);" onclick="switch_screen(1)"><img src="./img/program.svg"></img>Programming</a></td></tr>
+					<tr><td><a href="./index.html"><img src="./img/compete.svg"></img>Contest Link</a></td></tr>
+				</tbody>
+			</table>
+		</div>
+		<div class="main">
+			<h2>Painter Programming</h2>
+			<div id="home">
+				<h3>パ研合宿 2019 体験企画「Painter Programming」とは？</h3>
+				<p>「パ研合宿 2019」体験企画の体験企画、「Painter Programming」です！</p>
+				<p>この企画では、2 次元のマス目上でロボットを動かし、マス目を目標のものに塗り替えます。ロボットを動かす際には、独自のプログラミング言語を使わなければなりません。できるだけ少ないプログラムの長さで問題を解いた人が勝ちとなります。</p>
+				<br />
+				<h3>プログラミング言語の文法</h3>
+				<p>まず、マス目の大きさ H × W を指定することができます。初期時点でのマス目はすべて白となっています。その中で、ロボットを次のように動かします。</p>
+				<p>使用するプログラミング言語は、以下のような文法になっています。</p>
+				<ul>
+					<li>最初ロボットは左上のマスにおり、右方向を向いています</li>
+					<li><code>F</code>：向いている方向に 1 マス進む。外壁に当たった場合はそのマスにとどまる</li>
+					<li><code>L</code>：向いている方向を 90° 左に回転させる</li>
+					<li><code>R</code>：向いている方向を 90° 右に回転させる</li>
+					<li><code>!</code>：現在ロボットがいるマスの色が白なら黒に、黒なら白にする</li>
+					<li><code>()</code>：カッコの中をループする。1 回のループの開始時点で、現在のマスが黒マスならば、ループを抜け出す。</li>
+					<li><code>[]</code>：カッコの中をループする。1 回のループの開始時点で、現在のマスが壁マスならば、ループを抜け出す。</li>
+				</ul>
+				<p>例えば、<code>![F!]</code> というコードを書くと、一番上の行のマスを全部黒に塗り替えて、プログラムの実行が終了します。</p>
+				<p>100,000 回以上のイテレーションをした場合、無限ループとして扱われ、プログラムはランタイムエラーを起こします。</p>
+			</div>
+			<div id="editor">
+				<h3>プログラムを書く</h3>
+				<p>まず、マス目の縦の長さと横の長さを設定してください。</p>
+				<ul>
+					<li>縦の長さ H (1 ≦ H ≦ 30)：<input type="number" min="1" max="30" class="number-input" id="number-row" /></li>
+					<li>横の長さ W (1 ≦ W ≦ 30)：<input type="number" min="1" max="30" class="number-input" id="number-col" /></li>
+				</ul>
+				<br />
+				<p>次に、ここにプログラムを書いてください。</p>
+				<textarea rows="4" id="editing-space" oninput="update_program_length()"></textarea>
+				<div id="editing-messages">
+					<button id="run-button" onclick="run_program()">Run!</button>
+					<p id="editing-message" style="color: white">プログラム：<span id="program-length"></span> 文字　／　メッセージ：<span id="error-message">なし</span></p>
+				</div>
+				<p>「Run!」を押すと、プログラムが実行されます。</p>
+				<br />
+				<div id="run-result" style="display: none">
+					<h3>実行結果</h3>
+					<p>以下が実行結果となります。</p>
+					<p>コントローラーなどを操作すると再生することができます。</p>
+					<table class="controller-bar">
+						<tbody>
+							<tr>
+								<td style="background-color: #080808; color: white">プログラム</td>
+								<td id="result-program" style="font-family: 'Courier New', Courier, monospace; background-color: #333333; color: white; word-break: break-all" colspan="3"></td>
+							</tr>
+							<tr>
+								<td style="background-color: #080808; color: white">再生速度</td>
+								<td id="viewing-speed" style="background-color: #333333; color: white" width="80"></td>
+								<td style="background-color: #333333; color: white" colspan="2">
+									<input id="viewing-speed-input" style="width: 350px" type="range" min="0" max="12" step="0.02" oninput="change_viewspeed()" onmouseup="change_execution_speed()"/>
+								</td>
+							</tr>
+							<tr>
+								<td style="background-color: #080808; color: white">ステップ</td>
+								<td id="num-iters" style="background-color: #333333; color: white" width="80">
+									<input id="num-iters-print" type="number" onchange="change_numiters_print()" />
+								</td>
+								<td style="background-color: #333333; color: white" width="30">
+									<a href="javascript:void(0);" onclick="switch_execution()">
+										<img id="execution-image" src="./img/play.svg" />
+									</a>
+								</td>
+								<td style="background-color: #333333; color: white" width="370">
+									<input id="num-iters-input" style="width: 320px" type="range" oninput="change_numiters()" />
+								</td>
+							</tr>
+						</tbody>
+					</table>
+					<br />
+					<div id="result-main" style="float: left">
+						<canvas id="cvs">
+							This browser does not support HTML canvas.
+						</canvas>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script src="./execution.js"></script>
+		<script>
+			function switch_screen(key) {
+				if(key == 0) {
+					document.getElementById("home").style.display = "block";
+					document.getElementById("editor").style.display = "none";
+				}
+				if(key == 1) {
+					document.getElementById("home").style.display = "none";
+					document.getElementById("editor").style.display = "block";
+				}
+			}
+			function update_program_length() {
+				var program_str = document.getElementById("editing-space").value;
+				var program_length = 0;
+				for(var i = 0; i < program_str.length; ++i) {
+					if(program_str[i] != ' ' && program_str[i] != '\n') {
+						++program_length;
+					}
+				}
+				document.getElementById("program-length").innerHTML = program_length;
+			}
+			function change_viewspeed() {
+				var res = parseFloat(document.getElementById("viewing-speed-input").value);
+				res = Math.pow(2, res);
+				var res_shift = res;
+				if(res_shift < 10) res_shift = Math.round(res * 10) / 10;
+				else res_shift = Math.round(res);
+				document.getElementById("viewing-speed").innerHTML = res_shift;
+			}
+			var execution_iv, delta = 0;
+			function change_execution_speed() {
+				var cur = document.getElementById("execution-image").src;
+				cur = cur.substr(cur.length - 9, 9);
+				if(cur == "pause.svg") {
+					var res = parseFloat(document.getElementById("viewing-speed-input").value);
+					res = Math.pow(2, res);
+					delta = Math.floor(res / 30) + 1;
+					clearInterval(execution_iv);
+					execution_iv = setInterval("move_execution()", 1000 * delta / res);
+				}
+			}
+			function change_numiters() {
+				var res = parseInt(document.getElementById("num-iters-input").value);
+				document.getElementById("num-iters-print").value = res;
+				draw(res);
+			}
+			function change_numiters_print() {
+				var res = document.getElementById("num-iters-print").value;
+				if(0 <= res && res < board.length && is_number(res)) {
+					res = parseInt(res);
+					document.getElementById("num-iters-input").value = res;
+				}
+				change_numiters();
+			}
+			function switch_execution() {
+				var play_img = "./img/play.svg";
+				var pause_img = "./img/pause.svg";
+				var cur = document.getElementById("execution-image").src;
+				cur = cur.substr(cur.length - 8, 8);
+				if(cur == "play.svg") {
+					document.getElementById("execution-image").src = pause_img;
+					var res = parseFloat(document.getElementById("viewing-speed-input").value);
+					res = Math.pow(2, res);
+					delta = Math.floor(res / 30) + 1;
+					execution_iv = setInterval("move_execution()", 1000 * delta / res);
+				}
+				else {
+					document.getElementById("execution-image").src = play_img;
+					delta = 0;
+					clearInterval(execution_iv);
+				}
+			}
+			function move_execution() {
+				var res = parseInt(document.getElementById("num-iters-input").value);
+				res = Math.min(res + delta, board.length - 1);
+				document.getElementById("num-iters-input").value = res;
+				change_numiters();
+				draw(res);
+				if(res == board.length - 1) {
+					switch_execution();
+				}
+			}
+			switch_screen(0);
+			update_program_length();
+		</script>
+	</body>
+</html>

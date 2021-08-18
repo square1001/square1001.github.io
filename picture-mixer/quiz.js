@@ -113,7 +113,7 @@ function draw_picture() {
 		context.drawImage(img_base, picture_id_1[question_id] * 32, picture_label_1[question_id] * 32, 32, 32, 0, 0, 32, 32);
 		for(var i = 0; i < 32; i++) {
 			for(var j = 0; j < 32; j++) {
-				var pixel_p = context.getImageData(i, j, 1, 1).data;
+				var pixel_p = context.getImageData(j, i, 1, 1).data;
 				pixel_array_r[i * 32 + j] += pixel_p[0];
 				pixel_array_g[i * 32 + j] += pixel_p[1];
 				pixel_array_b[i * 32 + j] += pixel_p[2];
@@ -122,7 +122,7 @@ function draw_picture() {
 		context.drawImage(img_base, picture_id_2[question_id] * 32, picture_label_2[question_id] * 32, 32, 32, 0, 0, 32, 32);
 		for(var i = 0; i < 32; i++) {
 			for(var j = 0; j < 32; j++) {
-				var pixel_p = context.getImageData(i, j, 1, 1).data;
+				var pixel_p = context.getImageData(j, i, 1, 1).data;
 				pixel_array_r[i * 32 + j] += pixel_p[0];
 				pixel_array_g[i * 32 + j] += pixel_p[1];
 				pixel_array_b[i * 32 + j] += pixel_p[2];

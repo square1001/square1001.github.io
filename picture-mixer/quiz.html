@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Image Mixer Quiz</title>
+		<link type="text/css" rel="stylesheet" href="css.css" />
+		<meta charset="utf-8" />
+	</head>
+	<body>
+		<h1>Image Mixer Quiz</h1>
+		<div id="mode-select">
+			<h2>Mode Select</h2>
+			<p>Which mode do you select?</p>
+			<div style="padding: 5px 5px 5px 15px">
+				<input type="radio" id="mode-1" name="select-mode" value="mode-1">
+				<label for="mode-1">Mode 1</label>
+				<input type="radio" id="mode-2" name="select-mode" value="mode-2">
+				<label for="mode-2">Mode 2</label>
+				<input type="radio" id="mode-3" name="select-mode" value="mode-3">
+				<label for="mode-3">Mode 3</label>
+				<input type="radio" id="mode-4" name="select-mode" value="mode-4">
+				<label for="mode-4">Mode 4</label>
+				<input type="radio" id="mode-5" name="select-mode" value="mode-5">
+				<label for="mode-5">Mode 5</label>
+				<input type="radio" id="mode-6" name="select-mode" value="mode-6">
+				<label for="mode-6">Mode 6</label>
+				<input type="radio" id="mode-7" name="select-mode" value="mode-7">
+				<label for="mode-7">Mode 7</label>
+			</div>
+			<button id="start-button" onclick="start_quiz()">Start Quiz</button>
+		</div>
+		<br />
+		<div id="quiz" style="display: none">
+			<h2>Quiz</h2>
+			<p>Select one/two label(s) for the following picture.</p>
+			<div id="label-choice-1" style="padding: 5px 5px 5px 15px"></div>
+			<div id="label-choice-2" style="padding: 5px 5px 5px 15px"></div>
+			<p id="scoreboard">Score: 0 / 0</p>
+			<p id="message">Message: None</p>
+			<button id="answer-button" onclick="answer_quiz()">Answer!</button>
+			<canvas id="cvs" width="320px" height="320px" style="margin: 20px; border: 7px solid #999944">
+				This browser does not support HTML5 Canvas.
+			</canvas>
+			<script src="quiz.js"></script>
+		</div>
+	</body>
+</html>

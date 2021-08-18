@@ -105,6 +105,11 @@ function draw_picture() {
 		var pixel_array_r = new Array(32 * 32);
 		var pixel_array_g = new Array(32 * 32);
 		var pixel_array_b = new Array(32 * 32);
+		for(var i = 0; i < 32 * 32; i++) {
+			pixel_array_r[i] = 0;
+			pixel_array_g[i] = 0;
+			pixel_array_b[i] = 0;
+		}
 		context.drawImage(img_base, picture_id_1[question_id] * 32, picture_label_1[question_id] * 32, 32, 32, 0, 0, 32, 32);
 		for(var i = 0; i < 32; i++) {
 			for(var j = 0; j < 32; j++) {

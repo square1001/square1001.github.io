@@ -29,8 +29,8 @@ function start_quiz() {
 					break;
 				}
 			}
-			picture_id_1[i] = Math.floor(Math.random() * 10);
-			picture_id_2[i] = Math.floor(Math.random() * 10);
+			picture_id_1[i] = Math.floor(Math.random() * 100);
+			picture_id_2[i] = Math.floor(Math.random() * 100);
 		}
 		var can_exit = true;
 		for(var i = 0; i < 10; i++) {

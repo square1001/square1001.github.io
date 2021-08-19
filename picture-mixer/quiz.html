@@ -26,6 +26,7 @@
 				<input type="radio" id="mode-7" name="select-mode" value="mode-7">
 				<label for="mode-7">Mode 7</label>
 			</div>
+			<p id="mode-message" style="display: none">Please select one of the Game Modes.</p>
 			<button id="start-button" onclick="start_quiz()">Start Quiz</button>
 		</div>
 		<br />
@@ -41,6 +42,10 @@
 				This browser does not support HTML5 Canvas.
 			</canvas>
 			<script src="quiz.js"></script>
+		</div>
+		<div>
+			<h2>Note</h2>
+			<p>The image data used in this quiz are taken from <a href="https://www.cs.toronto.edu/~kriz/cifar.html">CIFAR-10 dataset</a> created by Alex Krizhevsky.</p>
 		</div>
 	</body>
 </html>

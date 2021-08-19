@@ -20,6 +20,11 @@ function start_quiz() {
 			mode_id = i + 1;
 		}
 	}
+	if(mode_id == -1) {
+		document.getElementById("mode-message").style.display = "block";
+		return;
+	}
+	document.getElementById("mode-message").style.display = "none";
 	while(true) {
 		for(var i = 0; i < 10; i++) {
 			while(true) {
@@ -140,14 +145,31 @@ function update_score() {
 	if(question_id == -1) {
 		document.getElementById("scoreboard").innerHTML = "Final Score: " + score + " / 100";
 		document.getElementById("scoreboard").style = "color: green";
+		document.getElementById("answer-button").innerHTML = "Tweet!";
+		document.getElementById("answer-button").style.border = "2px solid #1DA1F2";
+		document.getElementById("answer-button").style.backgroundColor = "#1DA1F2";
 	}
 	else {
 		document.getElementById("scoreboard").innerHTML = "Score: " + score + " / " + (question_id * 10);
 		document.getElementById("scoreboard").style = "";
+		document.getElementById("answer-button").innerHTML = "Answer!";
+		document.getElementById("answer-button").style.border = "2px solid #444444";
+		document.getElementById("answer-button").style.backgroundColor = "#444444";
 	}
+}
+function tweet_result() {
+	var tweet_url = "https://twitter.com/intent/tweet?text=";
+	tweet_url += "I%20got%20score%20";
+	tweet_url += score;
+	tweet_url += "%20on%20Mode%20";
+	tweet_url += mode_id;
+	tweet_url += "%20of%20Image%20Mixer%20Quiz%20by%20square1001!%0A";
+	tweet_url += "https://square1001.github.io/image-mixer/quiz.html%0A%23ImageMixerQuiz";
+	window.open(tweet_url);
 }
 function answer_quiz() {
 	if(question_id == -1) {
+		tweet_result();
 		return;
 	}
 	var select_choice_1 = document.getElementsByName("select-choice-1");
@@ -212,13 +234,11 @@ function answer_quiz() {
 		}
 		if(question_id != 9) {
 			question_id++;
-			document.getElementById("scoreboard").innerHTML = "Score: " + score + " / " + (question_id * 10);
 			draw_picture();
 		}
 		else {
 			question_id = -1;
-			document.getElementById("scoreboard").innerHTML = "Final Score: " + score + " / 100";
-			document.getElementById("scoreboard").style = "color: green";
 		}
+		update_score();
 	}
 }
